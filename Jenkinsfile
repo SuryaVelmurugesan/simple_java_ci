@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        EMAIL_RECIPIENT = 'suryavelmurugesan@gmail.com'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -28,15 +24,9 @@ pipeline {
     post {
         success {
             echo 'Build succeeded!'
-            mail to: "${EMAIL_RECIPIENT}",
-                 subject: "Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Build succeeded!\n\nCheck console: ${env.BUILD_URL}"
         }
         failure {
             echo 'Build failed!'
-            mail to: "${EMAIL_RECIPIENT}",
-                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Build failed!\n\nCheck console: ${env.BUILD_URL}"
         }
     }
 }
