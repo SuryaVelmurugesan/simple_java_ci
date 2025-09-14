@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-token', url: 'https://github.com/SuryaVelmurugesan/simple_java_ci.git'
+                git credentialsId: 'github-token1', url: 'https://github.com/SuryaVelmurugesan/simple_java_ci.git'
             }
         }
 
