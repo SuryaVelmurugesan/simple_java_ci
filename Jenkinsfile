@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK 21'
-        maven 'Maven 3'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -29,13 +24,13 @@ pipeline {
     post {
         success {
             mail to: 'suryavelmurugesan@gmail.com',
-                 subject: "Jenkins Build SUCCESS: ${currentBuild.fullDisplayName}",
-                 body: "Good news! The build succeeded.\n\nCheck it here: ${env.BUILD_URL}"
+                 subject: "✅ Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "The Jenkins build succeeded.\nCheck details here: ${env.BUILD_URL}"
         }
         failure {
             mail to: 'suryavelmurugesan@gmail.com',
-                 subject: "Jenkins Build FAILURE: ${currentBuild.fullDisplayName}",
-                 body: "Oops! The build failed.\n\nCheck the details: ${env.BUILD_URL}"
+                 subject: "❌ Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: "The Jenkins build failed.\nCheck details here: ${env.BUILD_URL}"
         }
     }
 }
